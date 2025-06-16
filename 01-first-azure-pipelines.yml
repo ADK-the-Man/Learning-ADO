@@ -6,11 +6,16 @@ pool:
   demands:
     - Agent.Name -equals Agent-01
 
-steps:
-- script: echo Hello, Hemalatha. How are you!
-  displayName: 'Run a one-line script'
+jobs:
+- job:
+  steps:
+  - script: echo Job1 - Hi From Job 1
+    displayName: 'Run a one-line script'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - script: |
+      echo Add other tasks to build, test, and deploy your project.
+      echo See https://aka.ms/yaml
+    displayName: 'Run a multi-line script'
+- job:
+  steps:
+  - script: echo Job1 - Hellow fro Job 2
