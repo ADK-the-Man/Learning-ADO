@@ -3,13 +3,14 @@ trigger:
 
 pool:
   name: default
+  demands:
+  - Agent.OS -equals Linux
 
 stages:
 - stage:
   jobs:
   - job:
     steps:
-    - bash: echo \n
     - bash: echo This is Artifact Staging Directory is $(Build.ArtifactStagingDirectory)
   - job:
     steps:
