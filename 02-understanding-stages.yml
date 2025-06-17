@@ -16,16 +16,16 @@ stages:
   - job:
     steps:
     - bash: echo \n
-    - bash: echo Build-ID ==> Build.BuildId
+    - bash: echo Build-ID is Build.BuildId
     - bash: echo java -version
     - bash: echo python --version
     - bash: echo source branch name $(Build.SourceBranchName)
-    - bash: echo build source directory ==> $(Build.SourcesDirectory)
+    - bash: echo build source directory is  $(Build.SourcesDirectory)
     - bash: echo "Below is the list of files in the Default working directory:&nbsp;$(System.DefaultWorkingDirectory)"
     - bash: ls -R $(System.DefaultWorkingDirectory)
-    - bash: echo Build-ID ==> Build.BuildId
-    - bash: echo Build-ID ==> Build.BuildId
-
+  - job:
+    steps:
+    - bash: echo Job 3
 #==== backup ===#
 # trigger:
 # - master
