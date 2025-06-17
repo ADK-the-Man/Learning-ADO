@@ -4,7 +4,7 @@ trigger:
 pool:
   name: default
   demands:
-    - Agent.Name -equals Agent-01
+    - Agent.OS -equals Linux
 
 stages:
 - stage: Build
@@ -19,7 +19,7 @@ stages:
 
   - job: SecondJob
     steps:
-    - bash: echo Build SecondJob
+    - bash: echo Build SecondJob with $(env)
 
 - stage: DevDeploy
   dependsOn: Build
