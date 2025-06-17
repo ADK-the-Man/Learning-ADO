@@ -7,39 +7,68 @@ pool:
     - Agent.OS -equals Linux
 
 stages:
-- stage: Build
-  variables:
-     env: dharani
-     dharani: adk
+- stage:
   jobs:
-  - job: FirstJob
+  - job:
     steps:
-    - bash: echo Build FirstJob "$(pipelinelevelvariable)"
-    - bash: echo $(env) is none other than $(dharani)
+    - bash: echo \n
+    - bash: echo This is Artifact Staging Directory ==> $(Build.ArtifactStagingDirectory)
+  - job:
+    steps:
+    - bash: echo \n
+    - bash: echo Build-ID ==> Build.BuildId
+    - bash: echo java -version
+    - bash: echo python --version
+    - bash: echo source branch name $(Build.SourceBranchName)
+    - bash: echo build source directory ==> $(Build.SourcesDirectory)
+    - bash: echo "Below is the list of files in the Default working directory:&nbsp;$(System.DefaultWorkingDirectory)"
+    - bash: ls -R $(System.DefaultWorkingDirectory)
+    - bash: echo Build-ID ==> Build.BuildId
+    - bash: echo Build-ID ==> Build.BuildId
 
-  - job: SecondJob
-    steps:
-    - bash: echo Build SecondJob with $(env)
+#==== backup ===#
+# trigger:
+# - master
 
-- stage: DevDeploy
-  dependsOn: Build
-  jobs:
-  - job: DevDeployJob
-    steps:
-    - bash: echo DevDeployJob
+# pool:
+#   name: default
+#   demands:
+#     - Agent.OS -equals Linux
+
+# stages:
+# - stage: Build
+#   variables:
+#      env: dharani
+#      dharani: adk
+#   jobs:
+#   - job: FirstJob
+#     steps:
+#     - bash: echo Build FirstJob "$(pipelinelevelvariable)"
+#     - bash: echo $(env) is none other than $(dharani)
+
+#   - job: SecondJob
+#     steps:
+#     - bash: echo Build SecondJob with $(env)
+
+# - stage: DevDeploy
+#   dependsOn: Build
+#   jobs:
+#   - job: DevDeployJob
+#     steps:
+#     - bash: echo DevDeployJob
   
-- stage: QADeploy
-  dependsOn: Build
-  jobs:
-  - job: QADeploy
-    steps:
-    - bash: echo QADeployJob
+# - stage: QADeploy
+#   dependsOn: Build
+#   jobs:
+#   - job: QADeploy
+#     steps:
+#     - bash: echo QADeployJob
 
-- stage: ProdDeploy
-  dependsOn:
-  - QADeploy
-  - DevDeploy
-  jobs:
-  - job: ProdDeploy
-    steps:
-    - bash: echo Production Deploy
+# - stage: ProdDeploy
+#   dependsOn:
+#   - QADeploy
+#   - DevDeploy
+#   jobs:
+#   - job: ProdDeploy
+#     steps:
+#     - bash: echo Production Deploy
