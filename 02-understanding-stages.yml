@@ -16,6 +16,7 @@ stages:
           **/*.tf
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - bash: ls -R $(Build.ArtifactStagingDirectory)
+    - bash: "In next step --  we publish the artifacts"
     
     - task: PublishBuildArtifacts@1
       inputs:
