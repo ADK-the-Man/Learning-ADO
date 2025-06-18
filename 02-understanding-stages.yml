@@ -1,17 +1,9 @@
 trigger:
 - master
 
-pool:
-  name: default
-  demands:
-  - Agent.OS -equals Linux
-
 stages:
 - stage:
   jobs:
-  - job:
-    steps:
-    - bash: echo This is Artifact Staging Directory is $(Build.ArtifactStagingDirectory)
   - job:
     steps:
     - bash: echo \n
@@ -22,9 +14,7 @@ stages:
     - bash: echo build source directory is  $(Build.SourcesDirectory)
     - bash: echo "Below is the list of files in the Default working directory:&nbsp;$(System.DefaultWorkingDirectory)"
     - bash: ls -R $(System.DefaultWorkingDirectory)
-  - job:
-    steps:
-    - bash: echo Job 3
+
 #==== backup ===#
 # trigger:
 # - master
