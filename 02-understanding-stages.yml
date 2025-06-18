@@ -6,17 +6,7 @@ stages:
   jobs:
   - job:
     steps:
-    - bash: echo \n
-    - bash: echo Build-ID is $(Build.BuildId)
-    - bash: java -version
-    - bash: python --version
-    - bash: kotlin -version
-    - bash: echo source branch name $(Build.SourceBranchName)
-    - bash: echo build source directory is  $(Build.SourcesDirectory)
-    - bash: echo "Below is the list of files in the Default working directory:&nbsp;$(System.DefaultWorkingDirectory)"
-    - bash: |
-       ls -R $(System.DefaultWorkingDirectory)
-       echo ###################Copy Section Begin###########################
+    - bash: mvn -version
     - bash: ls -R $(Build.ArtifactStagingDirectory)
     - task: CopyFiles@2
       inputs:
@@ -25,6 +15,13 @@ stages:
           **/*.yaml
           **/*.tf
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    - bash: ls -R $(Build.ArtifactStagingDirectory)
+    
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
 
 #==== backup ===#
 # trigger:
