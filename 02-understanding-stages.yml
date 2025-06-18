@@ -8,12 +8,23 @@ stages:
     steps:
     - bash: echo \n
     - bash: echo Build-ID is $(Build.BuildId)
-    - bash: echo java -version
-    - bash: echo python --version
+    - bash: java -version
+    - bash: python --version
+    - bash: kotlin -version
     - bash: echo source branch name $(Build.SourceBranchName)
     - bash: echo build source directory is  $(Build.SourcesDirectory)
     - bash: echo "Below is the list of files in the Default working directory:&nbsp;$(System.DefaultWorkingDirectory)"
-    - bash: ls -R $(System.DefaultWorkingDirectory)
+    - bash: |
+       ls -R $(System.DefaultWorkingDirectory)
+       echo ###################Copy Section Begin###########################
+    - bash: ls -R $(Build.ArtifactStagingDirectory)
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: |
+          **/*.yaml
+          **/*.tf
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 #==== backup ===#
 # trigger:
